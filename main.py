@@ -1,32 +1,40 @@
-import csv
-from datetime import datetime
+import csv  # Import the CSV module to work with CSV files
+from datetime import datetime  # Import datetime (can be used later for automatic date)
 
-bestand = "data.csv"
+# File where the work hours will be stored
+file_name = "data.csv"
 
-def schrijf_naar_csv(data):
+# Function to write data to the CSV file
+def write_to_csv(data):
     try:
-        with open(bestand, "a", newline="") as file:
-            writer = csv.writer(file)
-            writer.writerow(data)
+        # Open the CSV file in append mode ("a") to add new rows
+        # newline="" prevents extra blank lines between rows
+        with open(file_name, "a", newline="") as file:
+            writer = csv.writer(file)  # Create a CSV writer
+            writer.writerow(data)  # Add the new row to the file
     except Exception as e:
-        print("Fout bij opslaan:", e)
+        # Print error message if saving fails
+        print("Error saving data:", e)
 
-def vraag_input():
-    naam = input("Wat is je naam? ")
-    datum = input("Datum (YYYY-MM-DD): ")
-    uren = input("Aantal gewerkte uren: ")
-    project = input("Aan welk project werkte je? ")
+# Function to ask the user for input
+def get_input():
+    name = input("What is your name? ")  # Ask for name
+    date = input("Date (YYYY-MM-DD): ")  # Ask for date
+    hours = input("Number of hours worked: ")  # Ask for hours worked
+    project = input("Which project did you work on? ")  # Ask for project
 
-    return [naam, datum, uren, project]
+    # Return all answers as a list
+    return [name, date, hours, project]
 
+# Main program
 def main():
-    print("=== Urenregistratie Systeem ===")
+    print("=== Work Hours Registration System ===")  # Introduction for the user
 
-    data = vraag_input()
-    schrijf_naar_csv(data)
+    data = get_input()  # Get input from the user
+    write_to_csv(data)  # Save the data to CSV
 
-    print("Gegevens opgeslagen!")
+    print("Data saved!")  # Confirmation
 
+# Ensures the program only runs when executed directly
 if __name__ == "__main__":
     main()
-    
